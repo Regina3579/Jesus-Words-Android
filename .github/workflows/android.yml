@@ -1,0 +1,58 @@
+name: Android build
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Unit + screenshot tests
+        run: ./gradlew testDebugUnitTest --stacktrace
+
+      - name: Collect outputs
+        if: always()
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/debug/app-debug.apk out/JesusWords-preview.apk || true
+          cp app/build/screenshots/*.png out/ 2>/dev/null || true
+          ls -la out
+
+      - name: Upload APK and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JesusWords-preview
+          path: out/
+          if-no-files-found: warn
+
+      # A rolling pre-release, so the newest APK can be downloaded straight to a phone
+      # (no GitHub login or zip needed): Releases → "Android preview".
+      - name: Publish preview release
+        if: success() && github.ref_type == 'branch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete android-preview --yes --cleanup-tag || true
+          gh release create android-preview out/* \
+            --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "Android preview (${GITHUB_SHA::7})" \
+            --notes "Debug build of branch ${GITHUB_REF_NAME} at ${GITHUB_SHA::7}. Download JesusWords-preview.apk on your Android phone and open it to install. The PNG files are automatic screenshots of this build."
