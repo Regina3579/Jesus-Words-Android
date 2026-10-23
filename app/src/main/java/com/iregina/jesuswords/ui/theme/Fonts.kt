@@ -4,6 +4,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import com.iregina.jesuswords.R
 import com.iregina.jesuswords.data.AppLanguage
 import com.iregina.jesuswords.data.AppTheme
@@ -50,3 +52,16 @@ fun themeFontFamily(theme: AppTheme?, language: AppLanguage): FontFamily = when 
 /** Equivalent of `.font(.system(..., design: .serif))` regardless of theme. */
 fun serifFontFamily(language: AppLanguage): FontFamily =
     if (language == AppLanguage.TAMIL) NotoSerifTamil else NotoSerif
+
+/** Natural line height (ascent + descent) of each bundled family, as a multiple of the font size. */
+private fun FontFamily.naturalLineHeightRatio(): Float = when (this) {
+    NotoSerifTamil -> 1.561f
+    else -> 1.364f
+}
+
+/**
+ * SwiftUI `.lineSpacing(spacing)` adds [spacingSp] between lines on top of the font's own
+ * line height; Compose needs the total, so add them here.
+ */
+fun lineHeightWithSpacing(family: FontFamily, fontSizeSp: Float, spacingSp: Float): TextUnit =
+    (fontSizeSp * family.naturalLineHeightRatio() + spacingSp).sp
