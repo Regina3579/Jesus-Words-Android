@@ -129,7 +129,7 @@ fun FloatingTabBar(
             .softShadow(shape, alpha = 0.2f, radius = 10.dp, y = 5.dp)
             // iOS uses .ultraThinMaterial; a dark translucent plate keeps the white
             // labels readable on every theme without a backdrop blur.
-            .background(Color.Black.copy(alpha = 0.30f), shape)
+            .background(Color.Black.copy(alpha = 0.40f), shape)
             .border(0.5.dp, Color.White.copy(alpha = 0.18f), shape)
             .padding(horizontal = 10.dp, vertical = 12.dp),
     ) {

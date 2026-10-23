@@ -60,6 +60,7 @@ import com.iregina.jesuswords.ui.components.DropShadow
 import com.iregina.jesuswords.ui.components.FavoriteHeartButton
 import com.iregina.jesuswords.ui.components.LatinCrossIcon
 import com.iregina.jesuswords.ui.components.ThemeBackground
+import com.iregina.jesuswords.ui.components.WordFittedText
 import com.iregina.jesuswords.ui.components.contentCard
 import com.iregina.jesuswords.ui.components.plainClickable
 import com.iregina.jesuswords.ui.components.softShadow
@@ -222,7 +223,7 @@ private fun VerseCard(
 
             Box(Modifier.width(60.dp).height(2.dp).background(Color.White.copy(alpha = 0.3f)))
 
-            Text(
+            WordFittedText(
                 "“${word.quote(language)}”",
                 style = TextStyle(
                     fontFamily = family, fontWeight = FontWeight.Medium, fontSize = 20.sp,
