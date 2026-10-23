@@ -17,7 +17,8 @@ object Drawables {
         "bg_friends_on_high" to BackgroundImages(R.drawable.bg_friends_on_high_phone, R.drawable.bg_friends_on_high_tablet),
         "bg_garden_of_grace" to BackgroundImages(R.drawable.bg_garden_of_grace_phone, R.drawable.bg_garden_of_grace_tablet),
         "bg_gates_of_heaven" to BackgroundImages(R.drawable.bg_gates_of_heaven_phone, R.drawable.bg_gates_of_heaven_tablet),
-        "bg_gates_of_heaven_alt" to BackgroundImages(R.drawable.bg_gates_of_heaven_alt_phone, R.drawable.bg_gates_of_heaven_alt_tablet),
+        // The alternate Gates of Heaven theme art has no tablet crop; tablets crop the phone image.
+        "bg_gates_of_heaven_alt" to BackgroundImages(R.drawable.bg_gates_of_heaven_alt_phone, R.drawable.bg_gates_of_heaven_alt_phone),
         "bg_good_shepherd" to BackgroundImages(R.drawable.bg_good_shepherd_phone, R.drawable.bg_good_shepherd_tablet),
         "bg_holy_spirit_glow" to BackgroundImages(R.drawable.bg_holy_spirit_glow_phone, R.drawable.bg_holy_spirit_glow_tablet),
         "bg_lavender_grace" to BackgroundImages(R.drawable.bg_lavender_grace_phone, R.drawable.bg_lavender_grace_tablet),
