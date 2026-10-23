@@ -1,0 +1,187 @@
+[
+  {
+    "en": "✝️ Jesus Words",
+    "ta": "✝️ இயேசுவின் வார்த்தைகள்",
+    "file": "NotificationManager.swift"
+  },
+  {
+    "en": "All",
+    "ta": "அனைத்தும்",
+    "file": "FavoritesView.swift"
+  },
+  {
+    "en": "No favourites yet",
+    "ta": "இதுவரை பிடித்த வசனங்கள் இல்லை",
+    "file": "FavoritesView.swift"
+  },
+  {
+    "en": "Tap the ♡ on any verse to save it here, ready whenever you need encouragement.",
+    "ta": "எந்த வசனத்திலும் ♡ ஐத் தட்டி இங்கே சேமியுங்கள்",
+    "file": "FavoritesView.swift"
+  },
+  {
+    "en": "My Favourites",
+    "ta": "பிடித்தவை",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "History",
+    "ta": "வரலாறு",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Verses you saved, by topic",
+    "ta": "நீங்கள் சேமித்த வசனங்கள்",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Your Daily Blessings",
+    "ta": "உங்கள் தினசரி ஆசீர்வாதங்கள்",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "No history yet",
+    "ta": "இதுவரை வரலாறு இல்லை",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Your daily words will appear here",
+    "ta": "உங்கள் தினசரி வார்த்தைகள் இங்கே தோன்றும்",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Favourites",
+    "ta": "பிடித்தவை",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Shown on \\(formatted)",
+    "ta": "\\(formatted) அன்று காட்டப்பட்டது",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Share as Image",
+    "ta": "படமாகப் பகிரு",
+    "file": "HistoryView.swift"
+  },
+  {
+    "en": "Jesus Words",
+    "ta": "இயேசுவின் வார்த்தைகள்",
+    "file": "HomeView.swift"
+  },
+  {
+    "en": "Share This Blessing",
+    "ta": "இந்த ஆசீர்வாதத்தைப் பகிரு",
+    "file": "HomeView.swift"
+  },
+  {
+    "en": "Settings",
+    "ta": "அமைப்புகள்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Customize your experience",
+    "ta": "உங்கள் அனுபவத்தைத் தனிப்பயனாக்குங்கள்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Reminder Time",
+    "ta": "நினைவூட்டல் நேரம்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Saved!",
+    "ta": "சேமிக்கப்பட்டது!",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Update Reminder",
+    "ta": "நினைவூட்டலைப் புதுப்பி",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Show Tips Again",
+    "ta": "குறிப்புகளை மீண்டும் காட்டு",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "About",
+    "ta": "பற்றி",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Jesus Words brings you 365 authentic spoken words of Jesus Christ from the New Testament. Start each day with His wisdom, comfort, and encouragement.",
+    "ta": "இயேசுவின் வார்த்தைகள் புதிய ஏற்பாட்டிலிருந்து இயேசு கிறிஸ்துவின் 365 உண்மையான வார்த்தைகளை உங்களுக்குக் கொண்டுவருகிறது. ஒவ்வொரு நாளையும் அவரது ஞானம், ஆறுதல் மற்றும் ஊக்கத்துடன் தொடங்குங்கள்.",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Total Words",
+    "ta": "மொத்த வார்த்தைகள்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Categories",
+    "ta": "வகைகள்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Source",
+    "ta": "ஆதாரம்",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "New Testament (NIV)",
+    "ta": "புதிய ஏற்பாடு (NIV)",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Version",
+    "ta": "பதிப்பு",
+    "file": "SettingsView.swift"
+  },
+  {
+    "en": "Share Blessing",
+    "ta": "ஆசீர்வாதத்தைப் பகிரு",
+    "file": "ShareFlowView.swift"
+  },
+  {
+    "en": "Choose Wallpaper",
+    "ta": "வால்பேப்பர் தேர்வு",
+    "file": "ShareFlowView.swift"
+  },
+  {
+    "en": "Share",
+    "ta": "பகிரு",
+    "file": "ShareFlowView.swift"
+  },
+  {
+    "en": "Themes",
+    "ta": "தீம்கள்",
+    "file": "ThemeView.swift"
+  },
+  {
+    "en": "Choose your visual experience",
+    "ta": "உங்கள் காட்சி அனுபவத்தைத் தேர்வுசெய்யுங்கள்",
+    "file": "ThemeView.swift"
+  },
+  {
+    "en": "Current Theme",
+    "ta": "தற்போதைய தீம்",
+    "file": "ThemeView.swift"
+  },
+  {
+    "en": "Share Wallpapers",
+    "ta": "பகிர் வால்பேப்பர்கள்",
+    "file": "WallpapersView.swift"
+  },
+  {
+    "en": "Choose the background for shared verses",
+    "ta": "பகிரும் பட பின்னணியைத் தேர்வுசெய்யுங்கள்",
+    "file": "WallpapersView.swift"
+  },
+  {
+    "en": "Current Wallpaper",
+    "ta": "தற்போதைய வால்பேப்பர்",
+    "file": "WallpapersView.swift"
+  }
+]
