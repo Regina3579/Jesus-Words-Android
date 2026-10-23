@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.iregina.jesuswords.R
 import com.iregina.jesuswords.data.AppLanguage
-import com.iregina.jesuswords.ui.MainViewModel
+import com.iregina.jesuswords.ui.MainActions
 import com.iregina.jesuswords.ui.UiState
 import com.iregina.jesuswords.ui.components.ThemeBackground
 import com.iregina.jesuswords.ui.components.plainClickable
@@ -69,7 +69,7 @@ enum class MainTab(@DrawableRes val icon: Int, val english: String, val tamil: S
 
 /** The main screen (ContentView.swift): a HorizontalPager with a floating custom tab bar. */
 @Composable
-fun MainScreen(state: UiState, viewModel: MainViewModel) {
+fun MainScreen(state: UiState, actions: MainActions) {
     val tabs = MainTab.entries
     val pagerState = rememberPagerState { tabs.size }
     val scope = rememberCoroutineScope()
@@ -84,8 +84,8 @@ fun MainScreen(state: UiState, viewModel: MainViewModel) {
             when (tabs[page]) {
                 MainTab.TODAY -> TodayScreen(
                     state = state,
-                    onLanguageChange = viewModel::setLanguage,
-                    onToggleFavorite = viewModel::toggleFavorite,
+                    onLanguageChange = actions::setLanguage,
+                    onToggleFavorite = actions::toggleFavorite,
                     onShare = {
                         // The Share flow arrives in milestone 6.
                         Toast.makeText(

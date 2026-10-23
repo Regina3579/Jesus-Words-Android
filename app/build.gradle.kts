@@ -48,6 +48,13 @@ android {
         shaders = false
     }
 
+    testOptions {
+        unitTests {
+            // Robolectric screenshot tests read the real resources (images, fonts, JSON).
+            isIncludeAndroidResources = true
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -78,4 +85,16 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.serialization.json)
+    testImplementation(composeBom)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.roborazzi)
+    testImplementation(libs.roborazzi.compose)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+tasks.withType<Test>().configureEach {
+    // Roborazzi writes the PNGs when this is set (no Gradle plugin needed).
+    systemProperty("roborazzi.test.record", "true")
+    maxHeapSize = "3g"
 }

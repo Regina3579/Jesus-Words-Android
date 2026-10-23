@@ -37,8 +37,16 @@ data class UiState(
     fun isFavorite(word: JesusWord) = word.id in favoriteSet
 }
 
+/** Everything the UI can ask for; implemented by [MainViewModel] (and fakes in tests). */
+interface MainActions {
+    fun setLanguage(language: AppLanguage)
+    fun toggleFavorite(word: JesusWord)
+    fun selectTheme(theme: AppTheme)
+    fun selectWallpaper(wallpaper: Wallpaper)
+}
+
 /** The app-wide state holder (WordsViewModel.swift). */
-class MainViewModel(app: Application) : AndroidViewModel(app) {
+class MainViewModel(app: Application) : AndroidViewModel(app), MainActions {
     private val settingsRepository = SettingsRepository(app)
     private val content = MutableStateFlow<AppContent?>(null)
     private val today = MutableStateFlow(LocalDate.now())
@@ -66,19 +74,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun setLanguage(language: AppLanguage) {
+    override fun setLanguage(language: AppLanguage) {
         viewModelScope.launch { settingsRepository.setLanguage(language) }
     }
 
-    fun toggleFavorite(word: JesusWord) {
+    override fun toggleFavorite(word: JesusWord) {
         viewModelScope.launch { settingsRepository.toggleFavorite(word.id) }
     }
 
-    fun selectTheme(theme: AppTheme) {
+    override fun selectTheme(theme: AppTheme) {
         viewModelScope.launch { settingsRepository.setTheme(theme.id) }
     }
 
-    fun selectWallpaper(wallpaper: Wallpaper) {
+    override fun selectWallpaper(wallpaper: Wallpaper) {
         viewModelScope.launch { settingsRepository.setWallpaper(wallpaper.id) }
     }
 }

@@ -28,9 +28,18 @@ object ImageCache {
     /** Original pixel size of each drawable, read once from the file header. */
     private val bounds = HashMap<Int, Pair<Int, Int>>()
 
+    /** Sample sizes decoded so far for each drawable. */
+    private val samples = HashMap<Int, MutableSet<Int>>()
+
+    /**
+     * A cached bitmap good enough for the requested size: the exact down-sample, or the
+     * closest sharper one already decoded (avoids a placeholder flash when sizes differ).
+     */
     fun peek(@DrawableRes resId: Int, reqWidth: Int, reqHeight: Int): ImageBitmap? {
         val size = synchronized(bounds) { bounds[resId] } ?: return null
-        return bitmaps.get(key(resId, sampleSize(size, reqWidth, reqHeight)))
+        val needed = sampleSize(size, reqWidth, reqHeight)
+        val candidates = synchronized(samples) { samples[resId]?.filter { it <= needed }?.sortedDescending() }
+        return candidates.orEmpty().firstNotNullOfOrNull { bitmaps.get(key(resId, it)) }
     }
 
     suspend fun load(context: Context, @DrawableRes resId: Int, reqWidth: Int, reqHeight: Int): ImageBitmap =
@@ -49,6 +58,7 @@ object ImageCache {
         val opts = BitmapFactory.Options().apply { inSampleSize = sample }
         val bitmap = BitmapFactory.decodeResource(res, resId, opts).asImageBitmap()
         bitmaps.put(key, bitmap)
+        synchronized(samples) { samples.getOrPut(resId) { mutableSetOf() }.add(sample) }
         return bitmap
     }
 
