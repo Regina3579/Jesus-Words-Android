@@ -1,7 +1,15 @@
 package com.iregina.jesuswords.ui.main
 
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInRoot
+import com.iregina.jesuswords.ui.share.ShareFlowScreen
+import com.iregina.jesuswords.ui.tips.LanguageTip
+import com.iregina.jesuswords.ui.tips.ThemesTip
+import kotlinx.coroutines.delay
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -47,7 +55,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
@@ -84,27 +91,29 @@ fun MainScreen(state: UiState, actions: MainActions, initialTab: MainTab = MainT
     val tabs = MainTab.entries
     val pagerState = rememberPagerState(initialPage = initialTab.ordinal) { tabs.size }
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
     var detail by remember { mutableStateOf<VerseDetail?>(null) }
+    var shareWord by remember { mutableStateOf<JesusWord?>(null) }
 
-    // The Share flow arrives in milestone 6.
-    val share: (JesusWord) -> Unit = {
-        Toast.makeText(
-            context,
-            state.language.pick("Sharing is coming soon", "பகிர்வு விரைவில் வரும்"),
-            Toast.LENGTH_SHORT,
-        ).show()
-    }
     fun goTo(tab: MainTab) {
         scope.launch { pagerState.animateScrollToPage(tab.ordinal) }
     }
 
-    // Back closes the verse page first, then returns to Today, then leaves the app.
-    BackHandler(enabled = detail != null || pagerState.currentPage != MainTab.TODAY.ordinal) {
-        if (detail != null) detail = null else goTo(MainTab.TODAY)
+    // Back closes the share screen, then the verse page, then returns to Today, then leaves.
+    BackHandler(enabled = shareWord != null || detail != null || pagerState.currentPage != MainTab.TODAY.ordinal) {
+        when {
+            shareWord != null -> shareWord = null
+            detail != null -> detail = null
+            else -> goTo(MainTab.TODAY)
+        }
     }
 
-    Box(Modifier.fillMaxSize()) {
+    // Where the real controls are on screen, for the first-launch tips.
+    var toggleBounds by remember { mutableStateOf<Rect?>(null) }
+    var themesTabBounds by remember { mutableStateOf<Rect?>(null) }
+
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val screenWidth = constraints.maxWidth.toFloat()
+
         HorizontalPager(
             state = pagerState,
             beyondViewportPageCount = 1,
@@ -115,7 +124,8 @@ fun MainScreen(state: UiState, actions: MainActions, initialTab: MainTab = MainT
                     state = state,
                     onLanguageChange = actions::setLanguage,
                     onToggleFavorite = actions::toggleFavorite,
-                    onShare = share,
+                    onShare = { shareWord = it },
+                    onLanguageTogglePositioned = { toggleBounds = it.boundsInRoot() },
                 )
                 MainTab.HISTORY -> HistoryScreen(
                     state = state,
@@ -140,27 +150,131 @@ fun MainScreen(state: UiState, actions: MainActions, initialTab: MainTab = MainT
             language = state.language,
             onSelect = ::goTo,
             modifier = Modifier.align(Alignment.BottomCenter),
+            onTabPositioned = { tab, coordinates -> if (tab == MainTab.THEMES) themesTabBounds = coordinates.boundsInRoot() },
         )
 
         // Verse page from History / Favourites, sliding up over everything (iOS .sheet).
-        // Keeps the last verse on screen while the page slides away.
-        val lastDetail = remember { arrayOfNulls<VerseDetail>(1) }
-        if (detail != null) lastDetail[0] = detail
-        AnimatedVisibility(
-            visible = detail != null,
-            enter = slideInVertically(tween(300)) { it } + fadeIn(tween(300)),
-            exit = slideOutVertically(tween(250)) { it } + fadeOut(tween(250)),
-        ) {
-            lastDetail[0]?.let {
-                VerseDetailScreen(
-                    detail = it,
-                    state = state,
-                    onClose = { detail = null },
-                    onToggleFavorite = actions::toggleFavorite,
-                    onShare = share,
-                )
-            }
+        SlideUpOverlay(detail) {
+            VerseDetailScreen(
+                detail = it,
+                state = state,
+                onClose = { detail = null },
+                onToggleFavorite = actions::toggleFavorite,
+                onShare = { word -> shareWord = word },
+            )
         }
+
+        // Share flow, full screen over everything (iOS .fullScreenCover).
+        SlideUpOverlay(shareWord) {
+            ShareFlowScreen(
+                word = it,
+                state = state,
+                onSelectWallpaper = actions::selectWallpaper,
+                onClose = { shareWord = null },
+            )
+        }
+
+        FirstLaunchTipsLayer(
+            state = state,
+            actions = actions,
+            pagerState = pagerState,
+            blocked = detail != null || shareWord != null,
+            toggleBounds = toggleBounds,
+            themesTabBounds = themesTabBounds,
+            screenWidth = screenWidth,
+        )
+    }
+}
+
+/**
+ * The two first-launch tips, once per install and in order: the language tip 0.9 s after
+ * Today is showing, then the Themes tip 0.6 s after it closes. Going to the Themes tab also
+ * completes the Themes tip. "Show Tips Again" clears both flags, which replays them.
+ */
+@Composable
+private fun FirstLaunchTipsLayer(
+    state: UiState,
+    actions: MainActions,
+    pagerState: PagerState,
+    blocked: Boolean,
+    toggleBounds: Rect?,
+    themesTabBounds: Rect?,
+    screenWidth: Float,
+) {
+    val seenLanguage = state.settings.hasSeenLanguageTip
+    val seenThemes = state.settings.hasSeenThemesTip
+    var showLanguageTip by remember { mutableStateOf(false) }
+    var showThemesTip by remember { mutableStateOf(false) }
+    val onToday = pagerState.currentPage == MainTab.TODAY.ordinal && !pagerState.isScrollInProgress
+
+    LaunchedEffect(seenLanguage, toggleBounds != null, onToday, blocked) {
+        if (!seenLanguage && toggleBounds != null && onToday && !blocked) {
+            delay(900)
+            showLanguageTip = true
+        }
+    }
+    LaunchedEffect(seenLanguage, seenThemes, themesTabBounds != null, blocked) {
+        if (seenLanguage && !seenThemes && themesTabBounds != null && !blocked) {
+            delay(600)
+            showThemesTip = true
+        }
+    }
+    LaunchedEffect(pagerState.currentPage) {
+        if (pagerState.currentPage == MainTab.THEMES.ordinal && !seenThemes) {
+            showThemesTip = false
+            actions.markThemesTipSeen()
+        }
+    }
+
+    val language = state.language
+    TipFade(showLanguageTip && toggleBounds != null) {
+        LanguageTip(
+            toggle = toggleBounds ?: Rect.Zero,
+            screenWidth = screenWidth,
+            onDismiss = {
+                showLanguageTip = false
+                actions.markLanguageTipSeen()
+            },
+            contentDescription = language.pick(
+                "Tip: Tap the language button at the top right to view this Bible verse in English or Tamil. Got it.",
+                "குறிப்பு: இந்த வசனத்தை ஆங்கிலம் அல்லது தமிழில் காண மேலே வலதுபுறம் உள்ள மொழிப் பொத்தானைத் தட்டுங்கள்.",
+            ),
+        )
+    }
+    TipFade(showThemesTip && themesTabBounds != null) {
+        ThemesTip(
+            tab = themesTabBounds ?: Rect.Zero,
+            screenWidth = screenWidth,
+            onDismiss = {
+                showThemesTip = false
+                actions.markThemesTipSeen()
+            },
+            contentDescription = language.pick(
+                "Tip: Explore the Themes tab below to discover beautiful new themes for your daily Bible verses. Got it.",
+                "குறிப்பு: உங்கள் தினசரி வசனங்களுக்கான அழகிய தீம்களைக் காண கீழே உள்ள தீம்கள் பகுதியைத் திறங்கள்.",
+            ),
+        )
+    }
+}
+
+/** Fades a tip in and out over 0.3 s. */
+@Composable
+private fun TipFade(visible: Boolean, content: @Composable () -> Unit) {
+    AnimatedVisibility(visible = visible, enter = fadeIn(tween(300)), exit = fadeOut(tween(300))) { content() }
+}
+
+/** Slides a full-screen page up while [item] is non-null, and keeps it on screen while it slides away. */
+@Composable
+private fun <T : Any> SlideUpOverlay(item: T?, content: @Composable (T) -> Unit) {
+    val last = remember { arrayOfNulls<Any>(1) }
+    if (item != null) last[0] = item
+    AnimatedVisibility(
+        visible = item != null,
+        enter = slideInVertically(tween(300)) { it } + fadeIn(tween(300)),
+        exit = slideOutVertically(tween(250)) { it } + fadeOut(tween(250)),
+    ) {
+        @Suppress("UNCHECKED_CAST")
+        (last[0] as T?)?.let { content(it) }
     }
 }
 

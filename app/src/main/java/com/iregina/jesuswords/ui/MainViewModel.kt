@@ -61,6 +61,10 @@ interface MainActions {
 
     /** "Show Tips Again": both first-launch tips play once more. */
     fun resetTips()
+
+    fun markLanguageTipSeen()
+
+    fun markThemesTipSeen()
 }
 
 /** The app-wide state holder (WordsViewModel.swift). */
@@ -111,6 +115,14 @@ class MainViewModel(app: Application) : AndroidViewModel(app), MainActions {
 
     override fun resetTips() {
         viewModelScope.launch { settingsRepository.resetTips() }
+    }
+
+    override fun markLanguageTipSeen() {
+        viewModelScope.launch { settingsRepository.setSeenLanguageTip() }
+    }
+
+    override fun markThemesTipSeen() {
+        viewModelScope.launch { settingsRepository.setSeenThemesTip() }
     }
 
     override fun toggleFavorite(word: JesusWord) {

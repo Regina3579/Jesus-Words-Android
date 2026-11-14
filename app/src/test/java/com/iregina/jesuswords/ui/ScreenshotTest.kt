@@ -1,6 +1,16 @@
 package com.iregina.jesuswords.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.unit.Density
+import com.iregina.jesuswords.ui.share.ShareFlowScreen
+import com.iregina.jesuswords.ui.share.ShareImage
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -49,6 +59,8 @@ class ScreenshotTest {
         override fun selectWallpaper(wallpaper: Wallpaper) = Unit
         override fun setReminder(hour: Int, minute: Int) = Unit
         override fun resetTips() = Unit
+        override fun markLanguageTipSeen() = Unit
+        override fun markThemesTipSeen() = Unit
     }
 
     private fun millis(date: LocalDate) = date.atTime(9, 0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
@@ -59,6 +71,8 @@ class ScreenshotTest {
         date: LocalDate = today,
         favourites: List<Int> = emptyList(),
         historyDays: Int = 0,
+        seenLanguageTip: Boolean = true,
+        seenThemesTip: Boolean = true,
     ): UiState {
         val history = (0 until historyDays).map { back ->
             val day = date.minusDays(back.toLong())
@@ -71,6 +85,8 @@ class ScreenshotTest {
                 selectedThemeId = themeId,
                 favoriteVerseIds = favourites,
                 history = history,
+                hasSeenLanguageTip = seenLanguageTip,
+                hasSeenThemesTip = seenThemesTip,
             ),
             today = date,
         )
@@ -134,4 +150,55 @@ class ScreenshotTest {
     @Test fun settings_english() = main("22_settings_en", state("nativity_star", AppLanguage.ENGLISH), MainTab.SETTINGS)
 
     @Test fun settings_tamil() = main("23_settings_ta", state("sunrise_chapel", AppLanguage.TAMIL), MainTab.SETTINGS)
+
+    // Share flow and the exported 1080×1080 image.
+    private fun preloadWallpaper(id: String) {
+        Drawables.backgrounds[content.wallpaper(id).androidResource]?.let { ImageCache.loadBlocking(app, it.tablet, 4000, 4000) }
+    }
+
+    @Test fun shareFlow_english() {
+        val s = state("sunrise_chapel", AppLanguage.ENGLISH)
+        preloadWallpaper(s.wallpaper.id)
+        shoot("30_share_flow_en") {
+            ShareFlowScreen(content.wordFor(today)!!, s, onSelectWallpaper = {}, onClose = {})
+        }
+    }
+
+    private fun shareImage(name: String, language: AppLanguage, wallpaperId: String, verseId: Int) {
+        preloadWallpaper(wallpaperId)
+        val s = state("sunrise_chapel", language)
+        val res = Drawables.backgrounds.getValue(content.wallpaper(wallpaperId).androidResource)
+        val bitmap = ImageCache.loadBlocking(app, res.tablet, 4000, 4000)
+        compose.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(1f, 1f)) {
+                Box(Modifier.testTag("share")) {
+                    ShareImage(content.word(verseId)!!, s.theme, language, bitmap)
+                }
+            }
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag("share").captureRoboImage("build/screenshots/$name.png")
+    }
+
+    @Test fun shareImage_english() = shareImage("31_share_image_en", AppLanguage.ENGLISH, "wallpaper_gates_of_heaven", 296)
+
+    @Test fun shareImage_tamil_longest() = shareImage("32_share_image_ta_longest", AppLanguage.TAMIL, "wallpaper_good_shepherd", 218)
+
+    // First-launch tips.
+    private fun tip(name: String, state: UiState) {
+        preload(state.theme)
+        compose.setContent { MainScreen(state, NoActions) }
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1_500)
+        compose.waitUntil(10_000) {
+            compose.onAllNodes(hasContentDescription("Tip:", substring = true)).fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.mainClock.advanceTimeBy(500)
+        compose.waitForIdle()
+        compose.onRoot().captureRoboImage("build/screenshots/$name.png")
+    }
+
+    @Test fun tip_language() = tip("40_tip_language", state("sunrise_chapel", AppLanguage.ENGLISH, seenLanguageTip = false, seenThemesTip = false))
+
+    @Test fun tip_themes() = tip("41_tip_themes", state("river_of_life", AppLanguage.ENGLISH, seenThemesTip = false))
 }
