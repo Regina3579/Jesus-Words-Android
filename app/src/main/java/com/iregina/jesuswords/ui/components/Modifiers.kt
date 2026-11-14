@@ -28,7 +28,7 @@ fun Modifier.softShadow(
     alpha: Float,
     radius: Dp,
     y: Dp = 0.dp,
-    color: Color = Color.Black,
+    shadowColor: Color = Color.Black,
 ): Modifier = drawBehind {
     val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
         color = android.graphics.Color.TRANSPARENT
@@ -38,9 +38,9 @@ fun Modifier.softShadow(
             y.toPx(),
             android.graphics.Color.argb(
                 (alpha * 255).toInt().coerceIn(0, 254),
-                (color.red * 255).toInt(),
-                (color.green * 255).toInt(),
-                (color.blue * 255).toInt(),
+                (shadowColor.red * 255).toInt(),
+                (shadowColor.green * 255).toInt(),
+                (shadowColor.blue * 255).toInt(),
             ),
         )
     }

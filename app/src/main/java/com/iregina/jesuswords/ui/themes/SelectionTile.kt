@@ -50,7 +50,7 @@ fun SelectionTile(
                     alpha = if (isSelected) 0.2f else 0.15f,
                     radius = if (isSelected) 12.dp else 6.dp,
                     y = if (isSelected) 2.dp else 4.dp,
-                    color = if (isSelected) Color.White else Color.Black,
+                    shadowColor = if (isSelected) Color.White else Color.Black,
                 )
                 .clip(TileShape)
                 .border(if (isSelected) 2.5.dp else 1.dp, Color.White.copy(alpha = if (isSelected) 1f else 0.15f), TileShape)
