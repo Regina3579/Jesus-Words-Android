@@ -202,11 +202,12 @@ fun VerseRowCard(
 ) {
     val language = state.language
     val family = themeFontFamily(state.theme, language)
+    val shadow = textShadow(0.5f, 2.dp)
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
             .fillMaxWidth()
-            .contentCard(fillAlpha = 0.20f, cornerRadius = 16.dp, strokeAlpha = 0.22f)
+            .contentCard(cornerRadius = 16.dp, strokeAlpha = 0.22f)
             .plainClickable(onClick = onClick)
             .padding(16.dp),
     ) {
@@ -216,11 +217,11 @@ fun VerseRowCard(
                 word.categoryName(language),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = TextStyle(fontFamily = family, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = Color.White.copy(alpha = 0.8f)),
+                style = TextStyle(fontFamily = family, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = Color.White.copy(alpha = 0.8f), shadow = shadow),
                 modifier = Modifier.padding(start = 8.dp).weight(1f),
             )
             shownAtMillis?.let {
-                Text(mediumDate(it), style = TextStyle(fontSize = 12.sp, color = Color.White.copy(alpha = 0.6f)), maxLines = 1)
+                Text(mediumDate(it), style = TextStyle(fontSize = 12.sp, color = Color.White.copy(alpha = 0.7f), shadow = shadow), maxLines = 1)
             }
             FavoriteHeartButton(
                 isFavorite = state.isFavorite(word),
@@ -231,7 +232,7 @@ fun VerseRowCard(
         }
         Text(
             word.theme(language),
-            style = TextStyle(fontFamily = family, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White),
+            style = TextStyle(fontFamily = family, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White, shadow = shadow),
         )
         Text(
             "“${word.quote(language)}”",
@@ -239,14 +240,14 @@ fun VerseRowCard(
             overflow = TextOverflow.Ellipsis,
             style = TextStyle(
                 fontFamily = family, fontSize = 14.sp, color = Color.White.copy(alpha = 0.9f),
-                lineHeight = lineHeightWithSpacing(family, 14f, 3f),
+                lineHeight = lineHeightWithSpacing(family, 14f, 3f), shadow = shadow,
             ),
         )
         Text(
             "— ${word.reference(language)}",
             style = TextStyle(
                 fontFamily = family, fontSize = 13.sp, fontWeight = FontWeight.Medium, fontStyle = FontStyle.Italic,
-                color = Color.White.copy(alpha = 0.7f),
+                color = Color.White.copy(alpha = 0.75f), shadow = shadow,
             ),
         )
     }

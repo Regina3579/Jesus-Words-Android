@@ -56,12 +56,19 @@ fun Modifier.softShadow(
 }
 
 /**
+ * Fill for cards that iOS draws on `.ultraThinMaterial` (a frosted blur) plus black 20–22%.
+ * Android has no backdrop blur, so a stronger dark fill keeps the same contrast on bright
+ * pictures. The Today card stays at the iOS 18% because it has no material there.
+ */
+const val MaterialCardAlpha = 0.36f
+
+/**
  * The shared content card: translucent black fill, 1dp white 28% stroke, rounded corners.
  * SwiftUI draws the card's shadow (black 25%, r20, y+10) from the translucent fill, so the
  * visible shadow is proportionally faint; this mirrors that.
  */
 fun Modifier.contentCard(
-    fillAlpha: Float = 0.22f,
+    fillAlpha: Float = MaterialCardAlpha,
     cornerRadius: Dp = 20.dp,
     strokeAlpha: Float = 0.28f,
 ): Modifier {

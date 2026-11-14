@@ -60,6 +60,7 @@ import com.iregina.jesuswords.ui.components.DoubleShadowText
 import com.iregina.jesuswords.ui.components.DropShadow
 import com.iregina.jesuswords.ui.components.FavoriteHeartButton
 import com.iregina.jesuswords.ui.components.LatinCrossIcon
+import com.iregina.jesuswords.ui.components.MaterialCardAlpha
 import com.iregina.jesuswords.ui.components.TabBarSpacer
 import com.iregina.jesuswords.ui.components.ThemeBackground
 import com.iregina.jesuswords.ui.components.contentCard
@@ -289,7 +290,7 @@ data class VerseCardSizes(
 ) {
     companion object {
         val Today = VerseCardSizes(18.sp, 20.sp, 6f, 16.sp, 16.dp, 28.dp, 0.18f, bigEmoji = false)
-        val Detail = VerseCardSizes(24.sp, 22.sp, 8f, 18.sp, 16.dp, 28.dp, 0.22f, bigEmoji = true)
+        val Detail = VerseCardSizes(24.sp, 22.sp, 8f, 18.sp, 16.dp, 28.dp, MaterialCardAlpha, bigEmoji = true)
     }
 }
 

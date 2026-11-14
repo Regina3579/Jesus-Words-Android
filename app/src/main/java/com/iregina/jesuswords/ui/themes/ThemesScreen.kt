@@ -58,6 +58,7 @@ import com.iregina.jesuswords.ui.components.rememberOverlayPainters
 import com.iregina.jesuswords.ui.components.softShadow
 import com.iregina.jesuswords.ui.components.symbolDrawable
 import com.iregina.jesuswords.ui.theme.serifFontFamily
+import com.iregina.jesuswords.ui.theme.textShadow
 import com.iregina.jesuswords.ui.theme.themeFontFamily
 import kotlin.math.cos
 import kotlin.math.max
@@ -102,8 +103,8 @@ fun ThemesScreen(state: UiState, onSelect: (AppTheme) -> Unit, modifier: Modifie
                             title = theme.name,
                             subtitle = theme.subtitle,
                             titleFamily = themeFontFamily(theme, AppLanguage.ENGLISH),
-                            background = Color.White.copy(alpha = 0.08f),
-                            subtitleAlpha = 0.6f,
+                            background = Color.Black.copy(alpha = 0.35f),
+                            subtitleAlpha = 0.75f,
                         )
                     },
                 )
@@ -230,6 +231,7 @@ fun TileLabel(
     background: Color,
     subtitleAlpha: Float,
 ) {
+    val shadow = textShadow(0.6f, 2.dp)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(3.dp),
@@ -237,11 +239,11 @@ fun TileLabel(
     ) {
         Text(
             title, maxLines = 1, overflow = TextOverflow.Ellipsis,
-            style = TextStyle(fontFamily = titleFamily, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Color.White),
+            style = TextStyle(fontFamily = titleFamily, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Color.White, shadow = shadow),
         )
         Text(
             subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis,
-            style = TextStyle(fontSize = 10.sp, color = Color.White.copy(alpha = subtitleAlpha)),
+            style = TextStyle(fontSize = 10.sp, color = Color.White.copy(alpha = subtitleAlpha), shadow = shadow),
         )
     }
 }
