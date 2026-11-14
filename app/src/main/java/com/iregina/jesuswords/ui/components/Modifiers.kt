@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -22,14 +23,25 @@ import androidx.compose.ui.unit.dp
  * A soft drop shadow behind [shape], like SwiftUI `.shadow(color: .black.opacity(alpha),
  * radius:, y:)`. Uses Paint.setShadowLayer, which is drawn on Android 9+.
  */
-fun Modifier.softShadow(shape: Shape, alpha: Float, radius: Dp, y: Dp = 0.dp): Modifier = drawBehind {
+fun Modifier.softShadow(
+    shape: Shape,
+    alpha: Float,
+    radius: Dp,
+    y: Dp = 0.dp,
+    color: Color = Color.Black,
+): Modifier = drawBehind {
     val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
         color = android.graphics.Color.TRANSPARENT
         setShadowLayer(
             radius.toPx().coerceAtLeast(0.5f),
             0f,
             y.toPx(),
-            android.graphics.Color.argb((alpha * 255).toInt().coerceIn(0, 254), 0, 0, 0),
+            android.graphics.Color.argb(
+                (alpha * 255).toInt().coerceIn(0, 254),
+                (color.red * 255).toInt(),
+                (color.green * 255).toInt(),
+                (color.blue * 255).toInt(),
+            ),
         )
     }
     val canvas = drawContext.canvas.nativeCanvas
@@ -71,4 +83,14 @@ fun Modifier.plainClickable(enabled: Boolean = true, onClick: () -> Unit): Modif
         enabled = enabled,
         onClick = onClick,
     )
+}
+
+/**
+ * Makes a full-screen overlay take every touch, so taps on its empty areas do not reach
+ * the page underneath.
+ */
+fun Modifier.blockTouchesBelow(): Modifier = pointerInput(Unit) {
+    awaitPointerEventScope {
+        while (true) awaitPointerEvent()
+    }
 }

@@ -78,11 +78,15 @@ fun PictureBackground(resId: Int, placeholder: List<Color>, modifier: Modifier =
     }
 }
 
+/** Painters for a gradient theme's overlay icons (null = draw the Latin cross). */
+@Composable
+fun rememberOverlayPainters(theme: AppTheme): List<Painter?> = theme.overlayElements.map { overlay ->
+    symbolDrawable(overlay.icon)?.let { rememberVectorPainter(ImageVector.vectorResource(it)) }
+}
+
 @Composable
 private fun GradientBackground(theme: AppTheme) {
-    val painters: List<Painter?> = theme.overlayElements.map { overlay ->
-        symbolDrawable(overlay.icon)?.let { rememberVectorPainter(ImageVector.vectorResource(it)) }
-    }
+    val painters = rememberOverlayPainters(theme)
     val colors = theme.gradient
     Canvas(Modifier.fillMaxSize()) {
         drawRect(diagonalGradient(colors, size))
@@ -101,11 +105,16 @@ fun diagonalGradient(colors: List<Color>, size: Size? = null): Brush =
     }
 
 /** Each overlay icon centred at (x·width, y·height), white at its opacity, rotated. */
-fun DrawScope.drawOverlays(theme: AppTheme, painters: List<Painter?>, scale: Float = 1f) {
+fun DrawScope.drawOverlays(
+    theme: AppTheme,
+    painters: List<Painter?>,
+    scale: Float = 1f,
+    opacityScale: Float = 1f,
+) {
     theme.overlayElements.forEachIndexed { index, overlay ->
         val side = overlay.size.dp.toPx() * scale
         val center = Offset(size.width * overlay.x, size.height * overlay.y)
-        val color = Color.White.copy(alpha = overlay.opacity)
+        val color = Color.White.copy(alpha = (overlay.opacity * opacityScale).coerceAtMost(1f))
         val topLeft = Offset(center.x - side / 2f, center.y - side / 2f)
         rotate(overlay.rotationDeg, pivot = center) {
             val painter = painters.getOrNull(index)

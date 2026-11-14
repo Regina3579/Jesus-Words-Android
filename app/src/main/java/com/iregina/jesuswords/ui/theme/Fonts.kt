@@ -5,7 +5,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.em
 import com.iregina.jesuswords.R
 import com.iregina.jesuswords.data.AppLanguage
 import com.iregina.jesuswords.data.AppTheme
@@ -61,7 +61,8 @@ private fun FontFamily.naturalLineHeightRatio(): Float = when (this) {
 
 /**
  * SwiftUI `.lineSpacing(spacing)` adds [spacingSp] between lines on top of the font's own
- * line height; Compose needs the total, so add them here.
+ * line height. Compose needs the total; it is returned in `em` so it scales when the text
+ * is auto-sized down.
  */
 fun lineHeightWithSpacing(family: FontFamily, fontSizeSp: Float, spacingSp: Float): TextUnit =
-    (fontSizeSp * family.naturalLineHeightRatio() + spacingSp).sp
+    (family.naturalLineHeightRatio() + spacingSp / fontSizeSp).em

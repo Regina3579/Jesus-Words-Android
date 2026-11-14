@@ -1,6 +1,22 @@
 package com.iregina.jesuswords.ui.main
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.iregina.jesuswords.data.JesusWord
+import com.iregina.jesuswords.ui.history.HistoryScreen
+import com.iregina.jesuswords.ui.history.VerseDetail
+import com.iregina.jesuswords.ui.history.VerseDetailScreen
+import com.iregina.jesuswords.ui.settings.SettingsScreen
+import com.iregina.jesuswords.ui.themes.ThemesScreen
+import com.iregina.jesuswords.ui.wallpapers.WallpapersScreen
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -23,7 +39,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,12 +62,8 @@ import com.iregina.jesuswords.R
 import com.iregina.jesuswords.data.AppLanguage
 import com.iregina.jesuswords.ui.MainActions
 import com.iregina.jesuswords.ui.UiState
-import com.iregina.jesuswords.ui.components.ThemeBackground
 import com.iregina.jesuswords.ui.components.plainClickable
 import com.iregina.jesuswords.ui.components.softShadow
-import com.iregina.jesuswords.ui.theme.textShadow
-import com.iregina.jesuswords.ui.theme.themeFontFamily
-import com.iregina.jesuswords.ui.today.DoubleShadowText
 import com.iregina.jesuswords.ui.today.TodayScreen
 import kotlinx.coroutines.launch
 
@@ -69,11 +80,29 @@ enum class MainTab(@DrawableRes val icon: Int, val english: String, val tamil: S
 
 /** The main screen (ContentView.swift): a HorizontalPager with a floating custom tab bar. */
 @Composable
-fun MainScreen(state: UiState, actions: MainActions) {
+fun MainScreen(state: UiState, actions: MainActions, initialTab: MainTab = MainTab.TODAY) {
     val tabs = MainTab.entries
-    val pagerState = rememberPagerState { tabs.size }
+    val pagerState = rememberPagerState(initialPage = initialTab.ordinal) { tabs.size }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    var detail by remember { mutableStateOf<VerseDetail?>(null) }
+
+    // The Share flow arrives in milestone 6.
+    val share: (JesusWord) -> Unit = {
+        Toast.makeText(
+            context,
+            state.language.pick("Sharing is coming soon", "பகிர்வு விரைவில் வரும்"),
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
+    fun goTo(tab: MainTab) {
+        scope.launch { pagerState.animateScrollToPage(tab.ordinal) }
+    }
+
+    // Back closes the verse page first, then returns to Today, then leaves the app.
+    BackHandler(enabled = detail != null || pagerState.currentPage != MainTab.TODAY.ordinal) {
+        if (detail != null) detail = null else goTo(MainTab.TODAY)
+    }
 
     Box(Modifier.fillMaxSize()) {
         HorizontalPager(
@@ -86,25 +115,52 @@ fun MainScreen(state: UiState, actions: MainActions) {
                     state = state,
                     onLanguageChange = actions::setLanguage,
                     onToggleFavorite = actions::toggleFavorite,
-                    onShare = {
-                        // The Share flow arrives in milestone 6.
-                        Toast.makeText(
-                            context,
-                            state.language.pick("Sharing is coming soon", "பகிர்வு விரைவில் வரும்"),
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                    onShare = share,
+                )
+                MainTab.HISTORY -> HistoryScreen(
+                    state = state,
+                    onToggleFavorite = actions::toggleFavorite,
+                    onOpen = { detail = it },
+                )
+                MainTab.THEMES -> ThemesScreen(state, onSelect = actions::selectTheme)
+                MainTab.WALLPAPERS -> WallpapersScreen(state, onSelect = actions::selectWallpaper)
+                MainTab.SETTINGS -> SettingsScreen(
+                    state = state,
+                    onSaveReminder = actions::setReminder,
+                    onShowTipsAgain = {
+                        actions.resetTips()
+                        goTo(MainTab.TODAY)
                     },
                 )
-                else -> ComingSoonPage(state, tabs[page])
             }
         }
 
         FloatingTabBar(
             selected = tabs[pagerState.currentPage],
             language = state.language,
-            onSelect = { tab -> scope.launch { pagerState.animateScrollToPage(tab.ordinal) } },
+            onSelect = ::goTo,
             modifier = Modifier.align(Alignment.BottomCenter),
         )
+
+        // Verse page from History / Favourites, sliding up over everything (iOS .sheet).
+        // Keeps the last verse on screen while the page slides away.
+        val lastDetail = remember { arrayOfNulls<VerseDetail>(1) }
+        if (detail != null) lastDetail[0] = detail
+        AnimatedVisibility(
+            visible = detail != null,
+            enter = slideInVertically(tween(300)) { it } + fadeIn(tween(300)),
+            exit = slideOutVertically(tween(250)) { it } + fadeOut(tween(250)),
+        ) {
+            lastDetail[0]?.let {
+                VerseDetailScreen(
+                    detail = it,
+                    state = state,
+                    onClose = { detail = null },
+                    onToggleFavorite = actions::toggleFavorite,
+                    onShare = share,
+                )
+            }
+        }
     }
 }
 
@@ -173,30 +229,5 @@ private fun TabItem(tab: MainTab, label: String, isSelected: Boolean, onClick: (
             // Single line that may shrink to 70% (iOS minimumScaleFactor 0.7).
             autoSize = TextAutoSize.StepBased(minFontSize = 7.sp, maxFontSize = 10.sp, stepSize = 0.25.sp),
         )
-    }
-}
-
-/** Pages that later milestones fill in; they already draw the theme background. */
-@Composable
-private fun ComingSoonPage(state: UiState, tab: MainTab) {
-    Box(Modifier.fillMaxSize()) {
-        ThemeBackground(state.theme)
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.align(Alignment.Center).padding(horizontal = 24.dp),
-        ) {
-            DoubleShadowText(
-                text = tab.label(state.language),
-                style = TextStyle(
-                    fontFamily = themeFontFamily(state.theme, state.language),
-                    fontWeight = FontWeight.Bold, fontSize = 32.sp, color = Color.White,
-                ),
-            )
-            Text(
-                state.language.pick("Coming in the next update", "அடுத்த புதுப்பிப்பில் வரும்"),
-                style = TextStyle(fontSize = 15.sp, color = Color.White.copy(alpha = 0.85f), shadow = textShadow()),
-            )
-        }
     }
 }

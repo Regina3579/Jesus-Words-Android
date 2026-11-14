@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Decodes large background WebPs off the main thread, down-sampled to the size they
@@ -42,8 +43,17 @@ object ImageCache {
         return candidates.orEmpty().firstNotNullOfOrNull { bitmaps.get(key(resId, it)) }
     }
 
-    suspend fun load(context: Context, @DrawableRes resId: Int, reqWidth: Int, reqHeight: Int): ImageBitmap =
-        withContext(Dispatchers.IO) { loadBlocking(context, resId, reqWidth, reqHeight) }
+    /** Number of decodes running right now (lets screenshot tests wait for pictures). */
+    val inFlight = AtomicInteger(0)
+
+    suspend fun load(context: Context, @DrawableRes resId: Int, reqWidth: Int, reqHeight: Int): ImageBitmap {
+        inFlight.incrementAndGet()
+        try {
+            return withContext(Dispatchers.IO) { loadBlocking(context, resId, reqWidth, reqHeight) }
+        } finally {
+            inFlight.decrementAndGet()
+        }
+    }
 
     fun loadBlocking(context: Context, @DrawableRes resId: Int, reqWidth: Int, reqHeight: Int): ImageBitmap {
         val res = context.resources

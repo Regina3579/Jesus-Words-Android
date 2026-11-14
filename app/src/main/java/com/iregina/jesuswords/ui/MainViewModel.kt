@@ -11,6 +11,7 @@ import com.iregina.jesuswords.data.ContentRepository
 import com.iregina.jesuswords.data.JesusWord
 import com.iregina.jesuswords.data.SettingsRepository
 import com.iregina.jesuswords.data.Wallpaper
+import com.iregina.jesuswords.reminders.ReminderScheduler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,6 +22,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+
+/** A verse as shown in History: the verse and when it was shown (epoch millis). */
+data class ShownVerse(val word: JesusWord, val shownAtMillis: Long)
 
 /** Everything the screens draw from: bundled content + saved settings + today's date. */
 data class UiState(
@@ -34,6 +38,14 @@ data class UiState(
     val todaysWord: JesusWord? = content.wordFor(today)
     private val favoriteSet = settings.favoriteVerseIds.toSet()
 
+    /** History newest first, resolved to verses (entries for unknown ids are skipped). */
+    val history: List<ShownVerse> = settings.history.mapNotNull { entry ->
+        content.word(entry.verseId)?.let { ShownVerse(it, entry.dateShown) }
+    }
+
+    /** Favourites newest first. */
+    val favoriteWords: List<JesusWord> = settings.favoriteVerseIds.mapNotNull(content::word)
+
     fun isFavorite(word: JesusWord) = word.id in favoriteSet
 }
 
@@ -43,6 +55,12 @@ interface MainActions {
     fun toggleFavorite(word: JesusWord)
     fun selectTheme(theme: AppTheme)
     fun selectWallpaper(wallpaper: Wallpaper)
+
+    /** Saves the reminder time, turns reminders on and schedules the next 7 days. */
+    fun setReminder(hour: Int, minute: Int)
+
+    /** "Show Tips Again": both first-launch tips play once more. */
+    fun resetTips()
 }
 
 /** The app-wide state holder (WordsViewModel.swift). */
@@ -66,16 +84,33 @@ class MainViewModel(app: Application) : AndroidViewModel(app), MainActions {
      * today's verse to History (at most once per day).
      */
     fun onAppForeground() {
+        val app = getApplication<Application>()
         val date = LocalDate.now()
         today.value = date
+        ReminderScheduler.clearDelivered(app)
         viewModelScope.launch {
+            ReminderScheduler.rescheduleFromSettings(app)
             val word = content.filterNotNull().first().wordFor(date) ?: return@launch
             settingsRepository.recordShown(word.id, date, System.currentTimeMillis())
         }
     }
 
     override fun setLanguage(language: AppLanguage) {
-        viewModelScope.launch { settingsRepository.setLanguage(language) }
+        viewModelScope.launch {
+            settingsRepository.setLanguage(language)
+            ReminderScheduler.rescheduleFromSettings(getApplication<Application>())
+        }
+    }
+
+    override fun setReminder(hour: Int, minute: Int) {
+        viewModelScope.launch {
+            settingsRepository.setReminder(enabled = true, hour = hour, minute = minute)
+            ReminderScheduler.rescheduleFromSettings(getApplication<Application>())
+        }
+    }
+
+    override fun resetTips() {
+        viewModelScope.launch { settingsRepository.resetTips() }
     }
 
     override fun toggleFavorite(word: JesusWord) {
