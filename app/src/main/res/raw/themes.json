@@ -1,0 +1,812 @@
+[
+  {
+    "id": "sunrise_chapel",
+    "name": "Sunrise Chapel",
+    "subtitle": "Golden morning light",
+    "gradientColors": [
+      "#FFD966",
+      "#F28C40",
+      "#B2404C",
+      "#66264C"
+    ],
+    "accentColor": "#FFE699",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sun.max.fill",
+    "overlayElements": [
+      {
+        "icon": "cross.fill",
+        "size": 180.0,
+        "opacity": 0.06,
+        "x": 0.8,
+        "y": 0.3,
+        "rotationDeg": -10.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 30.0,
+        "opacity": 0.12,
+        "x": 0.15,
+        "y": 0.15,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 20.0,
+        "opacity": 0.1,
+        "x": 0.85,
+        "y": 0.12,
+        "rotationDeg": 45.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "mountain_sermon",
+    "name": "Mountain Sermon",
+    "subtitle": "Majestic mountain peaks",
+    "gradientColors": [
+      "#8CBFF2",
+      "#5973CC",
+      "#33338C",
+      "#1A1A59"
+    ],
+    "accentColor": "#B2D9FF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "mountain.2.fill",
+    "overlayElements": [
+      {
+        "icon": "mountain.2.fill",
+        "size": 250.0,
+        "opacity": 0.07,
+        "x": 0.5,
+        "y": 0.85,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "star.fill",
+        "size": 15.0,
+        "opacity": 0.15,
+        "x": 0.2,
+        "y": 0.1,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "star.fill",
+        "size": 10.0,
+        "opacity": 0.12,
+        "x": 0.7,
+        "y": 0.08,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "garden_gethsemane",
+    "name": "Garden of Gethsemane",
+    "subtitle": "Peaceful olive garden",
+    "gradientColors": [
+      "#A6D98C",
+      "#59A666",
+      "#2E6B4C",
+      "#14382E"
+    ],
+    "accentColor": "#CCF2B2",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "leaf.fill",
+    "overlayElements": [
+      {
+        "icon": "leaf.fill",
+        "size": 160.0,
+        "opacity": 0.06,
+        "x": 0.85,
+        "y": 0.25,
+        "rotationDeg": -30.0
+      },
+      {
+        "icon": "leaf.fill",
+        "size": 100.0,
+        "opacity": 0.04,
+        "x": 0.1,
+        "y": 0.7,
+        "rotationDeg": 20.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 25.0,
+        "opacity": 0.1,
+        "x": 0.3,
+        "y": 0.15,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "sea_galilee",
+    "name": "Sea of Galilee",
+    "subtitle": "Calm turquoise waters",
+    "gradientColors": [
+      "#8CE6EB",
+      "#40B2CC",
+      "#1F73A6",
+      "#0D386B"
+    ],
+    "accentColor": "#B2F2FA",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "water.waves",
+    "overlayElements": [
+      {
+        "icon": "water.waves",
+        "size": 200.0,
+        "opacity": 0.06,
+        "x": 0.5,
+        "y": 0.8,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "wind",
+        "size": 60.0,
+        "opacity": 0.05,
+        "x": 0.8,
+        "y": 0.15,
+        "rotationDeg": -10.0
+      },
+      {
+        "icon": "bird.fill",
+        "size": 25.0,
+        "opacity": 0.08,
+        "x": 0.25,
+        "y": 0.12,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "starry_bethlehem",
+    "name": "Starry Bethlehem",
+    "subtitle": "Deep celestial night",
+    "gradientColors": [
+      "#1A1F4C",
+      "#141440",
+      "#261F59",
+      "#0D0D2E"
+    ],
+    "accentColor": "#FFF2B2",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "star.fill",
+    "overlayElements": [
+      {
+        "icon": "star.fill",
+        "size": 50.0,
+        "opacity": 0.2,
+        "x": 0.5,
+        "y": 0.08,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "star.fill",
+        "size": 12.0,
+        "opacity": 0.25,
+        "x": 0.15,
+        "y": 0.2,
+        "rotationDeg": 15.0
+      },
+      {
+        "icon": "star.fill",
+        "size": 8.0,
+        "opacity": 0.2,
+        "x": 0.8,
+        "y": 0.15,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "star.fill",
+        "size": 10.0,
+        "opacity": 0.18,
+        "x": 0.65,
+        "y": 0.25,
+        "rotationDeg": 30.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "desert_wilderness",
+    "name": "Desert Wilderness",
+    "subtitle": "Warm sandy wilderness",
+    "gradientColors": [
+      "#F2D199",
+      "#E0A666",
+      "#B87347",
+      "#73402E"
+    ],
+    "accentColor": "#FFEBBF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sun.haze.fill",
+    "overlayElements": [
+      {
+        "icon": "sun.max.fill",
+        "size": 120.0,
+        "opacity": 0.08,
+        "x": 0.8,
+        "y": 0.1,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "wind",
+        "size": 80.0,
+        "opacity": 0.05,
+        "x": 0.3,
+        "y": 0.6,
+        "rotationDeg": 5.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "lily_fields",
+    "name": "Lily of the Fields",
+    "subtitle": "Soft floral serenity",
+    "gradientColors": [
+      "#FFF2F2",
+      "#F2CCD9",
+      "#CC8CA6",
+      "#8C4C73"
+    ],
+    "accentColor": "#FFE6EB",
+    "fontDesign": "rounded",
+    "decorativeIcon_SFSymbol": "camera.macro",
+    "overlayElements": [
+      {
+        "icon": "camera.macro",
+        "size": 140.0,
+        "opacity": 0.06,
+        "x": 0.85,
+        "y": 0.3,
+        "rotationDeg": -20.0
+      },
+      {
+        "icon": "camera.macro",
+        "size": 80.0,
+        "opacity": 0.04,
+        "x": 0.1,
+        "y": 0.65,
+        "rotationDeg": 15.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 18.0,
+        "opacity": 0.12,
+        "x": 0.4,
+        "y": 0.12,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "cedar_lebanon",
+    "name": "Cedar of Lebanon",
+    "subtitle": "Ancient forest majesty",
+    "gradientColors": [
+      "#598C59",
+      "#336640",
+      "#1F472E",
+      "#0D261A"
+    ],
+    "accentColor": "#A6D999",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "tree.fill",
+    "overlayElements": [
+      {
+        "icon": "tree.fill",
+        "size": 200.0,
+        "opacity": 0.06,
+        "x": 0.8,
+        "y": 0.75,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "tree.fill",
+        "size": 150.0,
+        "opacity": 0.04,
+        "x": 0.2,
+        "y": 0.8,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "leaf.fill",
+        "size": 30.0,
+        "opacity": 0.08,
+        "x": 0.15,
+        "y": 0.2,
+        "rotationDeg": -25.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "burning_bush",
+    "name": "Burning Bush",
+    "subtitle": "Holy fire and flame",
+    "gradientColors": [
+      "#FFBF4C",
+      "#F27333",
+      "#CC3326",
+      "#731A1A"
+    ],
+    "accentColor": "#FFD980",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "flame.fill",
+    "overlayElements": [
+      {
+        "icon": "flame.fill",
+        "size": 160.0,
+        "opacity": 0.08,
+        "x": 0.8,
+        "y": 0.3,
+        "rotationDeg": -5.0
+      },
+      {
+        "icon": "flame.fill",
+        "size": 100.0,
+        "opacity": 0.05,
+        "x": 0.15,
+        "y": 0.65,
+        "rotationDeg": 10.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 20.0,
+        "opacity": 0.15,
+        "x": 0.5,
+        "y": 0.1,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "heavenly_clouds",
+    "name": "Heavenly Clouds",
+    "subtitle": "Ethereal divine light",
+    "gradientColors": [
+      "#E6EBFF",
+      "#BFD1F2",
+      "#8CA6E0",
+      "#596BB8"
+    ],
+    "accentColor": "#F2F2FF",
+    "fontDesign": "rounded",
+    "decorativeIcon_SFSymbol": "cloud.fill",
+    "overlayElements": [
+      {
+        "icon": "cloud.fill",
+        "size": 180.0,
+        "opacity": 0.08,
+        "x": 0.75,
+        "y": 0.15,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "cloud.fill",
+        "size": 120.0,
+        "opacity": 0.05,
+        "x": 0.2,
+        "y": 0.25,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "sun.max.fill",
+        "size": 80.0,
+        "opacity": 0.06,
+        "x": 0.5,
+        "y": 0.05,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "royal_purple",
+    "name": "Royal Purple",
+    "subtitle": "Regal crown of glory",
+    "gradientColors": [
+      "#BF99F2",
+      "#8C59CC",
+      "#592E99",
+      "#2E1461"
+    ],
+    "accentColor": "#E0C7FF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "crown.fill",
+    "overlayElements": [
+      {
+        "icon": "crown.fill",
+        "size": 140.0,
+        "opacity": 0.07,
+        "x": 0.5,
+        "y": 0.15,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 25.0,
+        "opacity": 0.15,
+        "x": 0.2,
+        "y": 0.3,
+        "rotationDeg": 0.0
+      },
+      {
+        "icon": "sparkle",
+        "size": 18.0,
+        "opacity": 0.12,
+        "x": 0.8,
+        "y": 0.25,
+        "rotationDeg": 30.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "living_water",
+    "name": "Living Water",
+    "subtitle": "Rivers of living water",
+    "gradientColors": [
+      "#66CCE6",
+      "#3399C7",
+      "#1A669E",
+      "#0D3366"
+    ],
+    "accentColor": "#99EBFF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "drop.fill",
+    "overlayElements": [
+      {
+        "icon": "drop.fill",
+        "size": 100.0,
+        "opacity": 0.07,
+        "x": 0.8,
+        "y": 0.2,
+        "rotationDeg": 10.0
+      },
+      {
+        "icon": "drop.fill",
+        "size": 60.0,
+        "opacity": 0.05,
+        "x": 0.15,
+        "y": 0.55,
+        "rotationDeg": -15.0
+      },
+      {
+        "icon": "water.waves",
+        "size": 200.0,
+        "opacity": 0.05,
+        "x": 0.5,
+        "y": 0.85,
+        "rotationDeg": 0.0
+      }
+    ],
+    "backgroundImage": null,
+    "androidResource": null
+  },
+  {
+    "id": "gates_of_heaven",
+    "name": "Gates of Heaven",
+    "subtitle": "Pearly gates of glory",
+    "gradientColors": [
+      "#FFF2CC",
+      "#F2D98C",
+      "#CCB266",
+      "#8C7340"
+    ],
+    "accentColor": "#FFF2B2",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "ThemeGatesOfHeaven",
+    "androidResource": "bg_gates_of_heaven_alt"
+  },
+  {
+    "id": "river_of_life",
+    "name": "River of Life",
+    "subtitle": "Flowing from the throne",
+    "gradientColors": [
+      "#E6F2FF",
+      "#B2D9F2",
+      "#80B2E6",
+      "#4C80BF"
+    ],
+    "accentColor": "#F2FAFF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "Wallpaper2",
+    "androidResource": "bg_river_of_life"
+  },
+  {
+    "id": "good_shepherd",
+    "name": "The Good Shepherd",
+    "subtitle": "He leads me beside still waters",
+    "gradientColors": [
+      "#8CE6EB",
+      "#59BFD9",
+      "#338CB2",
+      "#1A5980"
+    ],
+    "accentColor": "#BFF2FA",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "Wallpaper3",
+    "androidResource": "bg_good_shepherd"
+  },
+  {
+    "id": "holy_spirit_glow",
+    "name": "Holy Spirit Glow",
+    "subtitle": "Living waters flowing",
+    "gradientColors": [
+      "#F2F2D9",
+      "#CCE6CC",
+      "#8CCCBF",
+      "#4C8CA6"
+    ],
+    "accentColor": "#FFFAE6",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "Wallpaper4",
+    "androidResource": "bg_holy_spirit_glow"
+  },
+  {
+    "id": "resurrection_glory",
+    "name": "Resurrection Glory",
+    "subtitle": "New life at sunrise",
+    "gradientColors": [
+      "#FFE6A6",
+      "#F2BF80",
+      "#BF9973",
+      "#737366"
+    ],
+    "accentColor": "#FFF2BF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "Wallpaper5",
+    "androidResource": "bg_resurrection_glory"
+  },
+  {
+    "id": "tree_of_life",
+    "name": "Tree of Life",
+    "subtitle": "Heavenly tree of eternal life",
+    "gradientColors": [
+      "#FFEBA6",
+      "#E6BF73",
+      "#8CB2A6",
+      "#40738C"
+    ],
+    "accentColor": "#FFF2B2",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "tree.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperTreeOfLife",
+    "androidResource": "bg_tree_of_life"
+  },
+  {
+    "id": "new_jerusalem",
+    "name": "New Jerusalem",
+    "subtitle": "The holy city above the clouds",
+    "gradientColors": [
+      "#FFF2CC",
+      "#F2D98C",
+      "#D9BF73",
+      "#808CA6"
+    ],
+    "accentColor": "#FFF2BF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "building.columns.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperNewJerusalem",
+    "androidResource": "bg_new_jerusalem"
+  },
+  {
+    "id": "still_waters",
+    "name": "Still Waters",
+    "subtitle": "He restores my soul",
+    "gradientColors": [
+      "#A6CCF2",
+      "#F2CC99",
+      "#CCBFA6",
+      "#668CB2"
+    ],
+    "accentColor": "#F2E6CC",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "water.waves",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperStillWaters",
+    "androidResource": "bg_still_waters"
+  },
+  {
+    "id": "star_of_bethlehem",
+    "name": "Star of Bethlehem",
+    "subtitle": "A light shining in the darkness",
+    "gradientColors": [
+      "#1A2666",
+      "#141F4C",
+      "#262659",
+      "#0D1433"
+    ],
+    "accentColor": "#FFE699",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "star.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperStarOfBethlehem",
+    "androidResource": "bg_star_of_bethlehem"
+  },
+  {
+    "id": "rainbow_promise",
+    "name": "Rainbow Promise",
+    "subtitle": "God's covenant of mercy",
+    "gradientColors": [
+      "#B2D9F2",
+      "#F2CCD9",
+      "#E6D999",
+      "#73B2BF"
+    ],
+    "accentColor": "#FFF2D9",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "rainbow",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperRainbowPromise",
+    "androidResource": "bg_rainbow_promise"
+  },
+  {
+    "id": "easter_dawn",
+    "name": "Easter Dawn",
+    "subtitle": "He is risen",
+    "gradientColors": [
+      "#FFCCBF",
+      "#F2B2A6",
+      "#D99999",
+      "#8C5966"
+    ],
+    "accentColor": "#FFEBD9",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sunrise.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperEasterDawn",
+    "androidResource": "bg_easter_dawn"
+  },
+  {
+    "id": "crystal_paradise",
+    "name": "Crystal Paradise",
+    "subtitle": "Clear waters of paradise",
+    "gradientColors": [
+      "#D9F2F2",
+      "#8CE6E6",
+      "#4CB2CC",
+      "#267399"
+    ],
+    "accentColor": "#E6FAFF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "water.waves",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperCrystalParadise",
+    "androidResource": "bg_crystal_paradise"
+  },
+  {
+    "id": "pentecost_light",
+    "name": "Pentecost Light",
+    "subtitle": "The Spirit descends",
+    "gradientColors": [
+      "#FFE6F2",
+      "#F2CCF2",
+      "#BFA6E6",
+      "#7359A6"
+    ],
+    "accentColor": "#FFF2FF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "sparkles",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperPentecostLight",
+    "androidResource": "bg_pentecost_light"
+  },
+  {
+    "id": "sacred_heart_cathedral",
+    "name": "Sacred Heart Cathedral",
+    "subtitle": "Sacred sanctuary of grace",
+    "gradientColors": [
+      "#FFD999",
+      "#F28C73",
+      "#BF3340",
+      "#731A26"
+    ],
+    "accentColor": "#FFE6BF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "building.columns.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperSacredHeartCathedral",
+    "androidResource": "bg_sacred_heart_cathedral"
+  },
+  {
+    "id": "crown_of_glory",
+    "name": "Crown of Glory",
+    "subtitle": "Royal throne of heaven",
+    "gradientColors": [
+      "#FFE6F2",
+      "#E6CCF2",
+      "#B299E6",
+      "#664CB2"
+    ],
+    "accentColor": "#FFF2FF",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "crown.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperCrownOfGlory",
+    "androidResource": "bg_crown_of_glory"
+  },
+  {
+    "id": "nativity_star",
+    "name": "Nativity Star",
+    "subtitle": "The star that led the wise",
+    "gradientColors": [
+      "#99BFF2",
+      "#4066BF",
+      "#1A3380",
+      "#0D1A4C"
+    ],
+    "accentColor": "#FFEBA6",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "star.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperNativityStar",
+    "androidResource": "bg_nativity_star"
+  },
+  {
+    "id": "rose_of_sharon",
+    "name": "Rose of Sharon",
+    "subtitle": "Beauty of the Beloved",
+    "gradientColors": [
+      "#FFE6D9",
+      "#FFBFBF",
+      "#F299A6",
+      "#B26680"
+    ],
+    "accentColor": "#FFF2E6",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "camera.macro",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperRoseOfSharon",
+    "androidResource": "bg_rose_of_sharon"
+  },
+  {
+    "id": "garden_of_grace",
+    "name": "Garden of Grace",
+    "subtitle": "Living waters flow here",
+    "gradientColors": [
+      "#E6F2CC",
+      "#B2D9A6",
+      "#66B280",
+      "#337359"
+    ],
+    "accentColor": "#F2FFE6",
+    "fontDesign": "serif",
+    "decorativeIcon_SFSymbol": "leaf.fill",
+    "overlayElements": [],
+    "backgroundImage": "WallpaperGardenOfGrace",
+    "androidResource": "bg_garden_of_grace"
+  }
+]

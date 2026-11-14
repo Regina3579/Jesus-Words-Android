@@ -1,0 +1,209 @@
+[
+  {
+    "id": "wallpaper_gates_of_heaven",
+    "name": "Gates of Heaven",
+    "tamilName": "விண்ணக வாயில்கள்",
+    "subtitle": "Pearly gates of glory",
+    "tamilSubtitle": "மகிமையின் முத்து வாயில்கள்",
+    "image": "Wallpaper1",
+    "androidResource": "bg_gates_of_heaven"
+  },
+  {
+    "id": "wallpaper_river_of_life",
+    "name": "River of Life",
+    "tamilName": "வாழ்வின் நதி",
+    "subtitle": "Flowing from the throne",
+    "tamilSubtitle": "அரியணையிலிருந்து பாயும் நதி",
+    "image": "Wallpaper2",
+    "androidResource": "bg_river_of_life"
+  },
+  {
+    "id": "wallpaper_good_shepherd",
+    "name": "The Good Shepherd",
+    "tamilName": "நல்ல ஆயன்",
+    "subtitle": "He leads me beside still waters",
+    "tamilSubtitle": "அமைதியான நீரருகே வழிநடத்துகிறார்",
+    "image": "Wallpaper3",
+    "androidResource": "bg_good_shepherd"
+  },
+  {
+    "id": "wallpaper_holy_spirit",
+    "name": "Holy Spirit Glow",
+    "tamilName": "தூய ஆவியின் ஒளி",
+    "subtitle": "Descending in light",
+    "tamilSubtitle": "ஒளியில் இறங்கும் ஆவி",
+    "image": "Wallpaper4",
+    "androidResource": "bg_holy_spirit_glow"
+  },
+  {
+    "id": "wallpaper_resurrection",
+    "name": "Resurrection Glory",
+    "tamilName": "உயிர்த்தெழுதலின் மகிமை",
+    "subtitle": "New life at sunrise",
+    "tamilSubtitle": "விடியலில் புதிய வாழ்வு",
+    "image": "Wallpaper5",
+    "androidResource": "bg_resurrection_glory"
+  },
+  {
+    "id": "wallpaper_tree_of_life",
+    "name": "Tree of Life",
+    "tamilName": "வாழ்வின் மரம்",
+    "subtitle": "Heavenly golden tree with waterfalls",
+    "tamilSubtitle": "நீர்வீழ்ச்சிகளுடன் வானுலகப் பொன் மரம்",
+    "image": "WallpaperTreeOfLife",
+    "androidResource": "bg_tree_of_life"
+  },
+  {
+    "id": "wallpaper_new_jerusalem",
+    "name": "New Jerusalem",
+    "tamilName": "புதிய எருசலேம்",
+    "subtitle": "Golden heavenly city above the clouds",
+    "tamilSubtitle": "மேகங்களுக்கு மேல் பொன்னான வானக நகரம்",
+    "image": "WallpaperNewJerusalem",
+    "androidResource": "bg_new_jerusalem"
+  },
+  {
+    "id": "wallpaper_still_waters",
+    "name": "Still Waters",
+    "tamilName": "அமைதியான நீர்",
+    "subtitle": "A peaceful lake at sunrise",
+    "tamilSubtitle": "விடியலில் அமைதியான ஏரி",
+    "image": "WallpaperStillWaters",
+    "androidResource": "bg_still_waters"
+  },
+  {
+    "id": "wallpaper_star_of_bethlehem",
+    "name": "Star of Bethlehem",
+    "tamilName": "பெத்லகேமின் விண்மீன்",
+    "subtitle": "A radiant star over Bethlehem",
+    "tamilSubtitle": "பெத்லகேமின் மேல் ஒளிவீசும் விண்மீன்",
+    "image": "WallpaperStarOfBethlehem",
+    "androidResource": "bg_star_of_bethlehem"
+  },
+  {
+    "id": "wallpaper_rainbow_promise",
+    "name": "Rainbow Promise",
+    "tamilName": "வானவில் வாக்குறுதி",
+    "subtitle": "God's promise over the valley",
+    "tamilSubtitle": "பள்ளத்தாக்கின் மேல் இறைவனின் வாக்குறுதி",
+    "image": "WallpaperRainbowPromise",
+    "androidResource": "bg_rainbow_promise"
+  },
+  {
+    "id": "wallpaper_easter_dawn",
+    "name": "Easter Dawn",
+    "tamilName": "உயிர்த்தெழுதலின் விடியல்",
+    "subtitle": "The tomb at sunrise",
+    "tamilSubtitle": "விடியலில் வெற்றுக் கல்லறை",
+    "image": "WallpaperEasterDawn",
+    "androidResource": "bg_easter_dawn"
+  },
+  {
+    "id": "wallpaper_crystal_paradise",
+    "name": "Crystal Paradise",
+    "tamilName": "படிகப் பரதீசு",
+    "subtitle": "Clear waters of paradise",
+    "tamilSubtitle": "பரதீசின் தெளிவான நீர்",
+    "image": "WallpaperCrystalParadise",
+    "androidResource": "bg_crystal_paradise"
+  },
+  {
+    "id": "wallpaper_pentecost_light",
+    "name": "Pentecost Light",
+    "tamilName": "பெந்தெகொஸ்தே ஒளி",
+    "subtitle": "Spirit descending in glory",
+    "tamilSubtitle": "மகிமையில் இறங்கும் தூய ஆவி",
+    "image": "WallpaperPentecostLight",
+    "androidResource": "bg_pentecost_light"
+  },
+  {
+    "id": "wallpaper_sacred_heart_cathedral",
+    "name": "Sacred Heart Cathedral",
+    "tamilName": "திருஇருதயத் திருக்கோயில்",
+    "subtitle": "Sacred sanctuary of grace",
+    "tamilSubtitle": "அருளின் புனிதக் கோயில்",
+    "image": "WallpaperSacredHeartCathedral",
+    "androidResource": "bg_sacred_heart_cathedral"
+  },
+  {
+    "id": "wallpaper_crown_of_glory",
+    "name": "Crown of Glory",
+    "tamilName": "மகிமையின் கிரீடம்",
+    "subtitle": "Royal throne of heaven",
+    "tamilSubtitle": "விண்ணரசின் அரியணை",
+    "image": "WallpaperCrownOfGlory",
+    "androidResource": "bg_crown_of_glory"
+  },
+  {
+    "id": "wallpaper_nativity_star",
+    "name": "Nativity Star",
+    "tamilName": "பிறப்பின் விண்மீன்",
+    "subtitle": "The star that led the wise",
+    "tamilSubtitle": "ஞானிகளை வழிநடத்திய விண்மீன்",
+    "image": "WallpaperNativityStar",
+    "androidResource": "bg_nativity_star"
+  },
+  {
+    "id": "wallpaper_rose_of_sharon",
+    "name": "Rose of Sharon",
+    "tamilName": "சாரோனின் ரோஜா",
+    "subtitle": "Beauty of the Beloved",
+    "tamilSubtitle": "அன்பருடைய அழகு",
+    "image": "WallpaperRoseOfSharon",
+    "androidResource": "bg_rose_of_sharon"
+  },
+  {
+    "id": "wallpaper_garden_of_grace",
+    "name": "Garden of Grace",
+    "tamilName": "அருளின் தோட்டம்",
+    "subtitle": "Living waters flow here",
+    "tamilSubtitle": "உயிர்தரும் நீர் பாயும் இடம்",
+    "image": "WallpaperGardenOfGrace",
+    "androidResource": "bg_garden_of_grace"
+  },
+  {
+    "id": "wallpaper_little_blessings",
+    "name": "Little Blessings",
+    "tamilName": "சிறு ஆசிகள்",
+    "subtitle": "Joy carried on heart balloons",
+    "tamilSubtitle": "இதயத்தில் பறக்கும் மகிழ்ச்சி",
+    "image": "WallpaperLittleBlessings",
+    "androidResource": "bg_little_blessings"
+  },
+  {
+    "id": "wallpaper_lavender_grace",
+    "name": "Lavender Grace",
+    "tamilName": "இளம் ஊதா அருள்",
+    "subtitle": "Gentle paths of grace",
+    "tamilSubtitle": "அருளின் மெல்லிய பாதை",
+    "image": "WallpaperLavenderGrace",
+    "androidResource": "bg_lavender_grace"
+  },
+  {
+    "id": "wallpaper_friends_on_high",
+    "name": "Friends on High",
+    "tamilName": "விண்ணக நண்பர்கள்",
+    "subtitle": "Rising together in joy",
+    "tamilSubtitle": "மகிழ்ச்சியில் ஒன்றாய் உயர்வோம்",
+    "image": "WallpaperFriendsOnHigh",
+    "androidResource": "bg_friends_on_high"
+  },
+  {
+    "id": "wallpaper_smiling_skies",
+    "name": "Smiling Skies",
+    "tamilName": "புன்னகைக்கும் வானம்",
+    "subtitle": "A world full of joy",
+    "tamilSubtitle": "மகிழ்ச்சி நிறைந்த உலகம்",
+    "image": "WallpaperSmilingSkies",
+    "androidResource": "bg_smiling_skies"
+  },
+  {
+    "id": "wallpaper_stacked_joy",
+    "name": "Stacked Joy",
+    "tamilName": "அடுக்கிய மகிழ்ச்சி",
+    "subtitle": "Blessings piled high",
+    "tamilSubtitle": "அடுக்கடுக்கான ஆசிகள்",
+    "image": "WallpaperStackedJoy",
+    "androidResource": "bg_stacked_joy"
+  }
+]
